@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <script defer src="./app.js"></script>
+    <header>
+      <div class="cart-nav-wrap">
+        <div class="cart-nav">
+          <div class="icon">
+            <i class="fas fa-shopping-cart">&#128722</i>
+            <span>Cart</span>
+          </div>
+          (<div class="item-count">0</div>)
+        </div>
+      </div>
+    </header>
+    <form class="form">
+      <div class="form--images">
+        <div class="image--container"></div>
+        <div class="image--changer">
+          <div class="start">
+            <button class="btn_prev"></button>
+          </div>
+          <div class="end">
+            <button class="btn_next"></button>
+          </div>
+        </div>
+        <div class="image--selection"></div>
+      </div>
+      <div class="product">
+        <div class="basket">
+          <p class="selected">
+            <div class="quantity_inner">        
+              <button class="bt_minus">-</button>
+              <input type="number" readonly class="quantity" value="0" min="0" max="2">
+              <button class="bt_plus">+</button>
+            </div>
+            <div class="label--container"></div>
+          </p>
+          <button class="button" id="button">Add to Shopping Cart</button>
+        </div>
+      </div>
+    </form>
+</body>
+</html>
