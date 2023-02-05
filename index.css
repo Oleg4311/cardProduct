@@ -133,7 +133,7 @@ main {
   display: none;
 }
 
-.thisQuantity{
+.thisQuantity, .thisUrls{
   display: none;
 }
 

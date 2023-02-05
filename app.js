@@ -9,7 +9,6 @@ const minus = document.querySelector('.bt_minus');
 const input = document.querySelector('.quantity');
 const label = document.querySelector('.label--container');
 const selected = document.querySelector('.quantity_inner');
-const changeBtns = document.querySelector('.image--changer');
 const next = document.querySelector('.btn_next');
 const previous = document.querySelector('.btn_prev');
 
@@ -24,43 +23,14 @@ const createImageGallery = (product) => {
   const getUrls = JSON.parse(product.images);
   let output = '';
   imageGallery.innerHTML = `<img src="${getUrls[0].img}" class="animate-entrance image--gallery" alt="${getUrls[0]}">`;
-  changeBtns.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (e.target === next) {
-      for (let i = 0; i < getUrls.length;) {
-        if (i === 0) {
-          previous.style.display = 'flex';
-        }
-        if (i < getUrls.length) {
-          i++;
-          imageGallery.innerHTML = `<img src="${getUrls[i].img}" class="animate-entrance image--gallery" alt="${getUrls[i]}">`;
-        }
-        if (i === getUrls.length - 1) {
-          next.style.display = 'none';
-        }
-      }
-    }
-    if (e.target === previous) {
-      for (let i = getUrls.length - 1; i > 0;) {
-        if (i === getUrls.length - 1) {
-          next.style.display = 'flex';
-        }
-        if (i > 0) {
-          i--;
-          imageGallery.innerHTML = `<img src="${getUrls[i].img}" class="animate-entrance image--gallery" alt="${getUrls[i]}">`;
-        }
-        if (i === 0) {
-          previous.style.display = 'none';
-        }
-      }
-    }
-  }, false);
   setTimeout(() => {
     imageGallery.children[0].classList.remove('animate-entrance');
   }, 500);
   getUrls.forEach((urls) => {
     output += `<img src="${urls.img}" alt="url" class="image__item" />`;
   });
+  const arrUrls = [];
+  getUrls.map((urls) => arrUrls.push(urls.img));
   imageContainer.innerHTML = output;
   if (+product.quantity === 0) {
     blockSelector();
@@ -74,6 +44,9 @@ const createImageGallery = (product) => {
     ${product.price} $
     <p class='thisQuantity'>
     ${product.quantity}
+    </p> 
+    <p class='thisUrls'>
+    ${arrUrls}
     </p>    
   </div>
 `);
@@ -95,24 +68,14 @@ const showImages = () => {
     });
 };
 
-const changeImage = (e) => {
-  const image = imageGallery.children[0];
-  previous.style.display = 'flex';
-  next.style.display = 'flex';
-  if (e.target.src) {
-    image.classList.add('animate-entrance');
-    image.src = e.target.src;
-    setTimeout(() => {
-      image.classList.remove('animate-entrance');
-    }, 800);
-  }
-};
-
 document.addEventListener('DOMContentLoaded', showImages);
-imageContainer.addEventListener('click', changeImage);
-allBtns.addEventListener('click', (e) => {
+
+document.addEventListener('click', (e) => {
   e.preventDefault();
   const thisQuantity = document.querySelector('.thisQuantity');
+  const objUrls = document.querySelector('.thisUrls');
+  const str = objUrls.textContent;
+  const result = str.replace(/\s+/g, '').split(',');
   if (e.target === plus) {
     if (+input.value < +thisQuantity.textContent) {
       input.value = +input.value + 1;
@@ -133,5 +96,45 @@ allBtns.addEventListener('click', (e) => {
     }
     document.querySelector('.item-count').innerHTML = `${input.value}`;
     input.value = 0;
+  }
+  if (e.target.parentNode === imageContainer) {
+    const image = imageGallery.children[0];
+    previous.style.display = 'flex';
+    next.style.display = 'flex';
+    if (e.target.src) {
+      image.classList.add('animate-entrance');
+      image.src = e.target.src;
+      setTimeout(() => {
+        image.classList.remove('animate-entrance');
+      }, 800);
+    }
+  }
+  if (e.target === next) {
+    for (let i = 0; i < result.length; i++) {
+      if (i === 0) {
+        previous.style.display = 'flex';
+      }
+      if (i < result.length) {
+        i++;
+        imageGallery.innerHTML = `<img src="${result[i]}" class="animate-entrance image--gallery" alt="${result[i]}">`;
+      }
+      if (i === result.length - 1) {
+        next.style.display = 'none';
+      }
+    }
+  }
+  if (e.target === previous) {
+    for (let i = result.length - 1; i > 0; i--) {
+      if (i === result.length - 1) {
+        next.style.display = 'flex';
+      }
+      if (i > 0) {
+        i--;
+        imageGallery.innerHTML = `<img src="${result[i]}" class="animate-entrance image--gallery" alt="${result[i]}">`;
+      }
+      if (i === 0) {
+        previous.style.display = 'none';
+      }
+    }
   }
 }, false);
