@@ -201,8 +201,14 @@ main {
     min-width: 300px;
   }
 
+  .cart-nav-wrap{
+    margin-top: 1%;
+    margin-bottom: 2%;
+  }
+
   .basket{
     justify-content: flex-start;
+    margin-bottom: 5%;
   }
 
   .quantity_inner{
