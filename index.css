@@ -188,6 +188,7 @@ main {
   .image__item {
     max-width: 140px;
     max-height: 150px;
+    flex-direction: row;
   }
 
 }
