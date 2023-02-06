@@ -185,9 +185,17 @@ main {
     max-height: 300px;
   }
 
+  .image--selection {
+    display: flex;
+    margin-top: 2%;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+
   .image__item {
     max-width: 140px;
     max-height: 150px;
+    margin-top: 2%;
     flex-direction: row;
   }
 
