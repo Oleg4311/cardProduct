@@ -99,8 +99,8 @@ document.addEventListener('click', (e) => {
   }
   if (e.target.parentNode === imageContainer) {
     const image = imageGallery.children[0];
-    previous.style.display = 'flex';
-    next.style.display = 'flex';
+    previous.style.display = 'block';
+    next.style.display = 'block';
     if (e.target.src) {
       image.classList.add('animate-entrance');
       image.src = e.target.src;
@@ -112,7 +112,7 @@ document.addEventListener('click', (e) => {
   if (e.target === next) {
     for (let i = 0; i < result.length; i++) {
       if (i === 0) {
-        previous.style.display = 'flex';
+        previous.style.display = 'block';
       }
       if (i < result.length) {
         i++;
@@ -126,7 +126,7 @@ document.addEventListener('click', (e) => {
   if (e.target === previous) {
     for (let i = result.length - 1; i > 0; i--) {
       if (i === result.length - 1) {
-        next.style.display = 'flex';
+        next.style.display = 'block';
       }
       if (i > 0) {
         i--;
